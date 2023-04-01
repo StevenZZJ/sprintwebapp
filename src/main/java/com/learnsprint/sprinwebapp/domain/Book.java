@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -20,6 +21,9 @@ public class Book {
 
     private String title;
     private String isbn;
+
+    @ManyToOne
+    private Publisher publisher;
 
     @ManyToAny
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
@@ -34,6 +38,17 @@ public class Book {
     public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
+    }
+
+
+    
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
 
